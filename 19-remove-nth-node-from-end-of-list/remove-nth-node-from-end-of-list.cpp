@@ -33,13 +33,13 @@ public:
         if(len==n){
             return deleteHead(head);
         }
-        int k = len-n-1;
+        int k = len-n;
         ListNode* temp = head;
-        while(k--){
+        while(--k){
             temp = temp->next;
         }
         ListNode* front = temp->next;
-       if(temp->next)temp->next = temp->next->next;
+       temp->next = temp->next->next;
         delete front;
         return head;
     }
