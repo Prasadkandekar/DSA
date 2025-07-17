@@ -7,7 +7,7 @@ public:
         
         if(n==0)return 0;
 
-        for(int i = 0 ;i < m-n+1 ;i++){
+        for(int i = 0 ;i < m-n+1;i++){
             bool match = true;
             for(int j = 0 ;j < n ;j++){
                 if(haystack[i+j] != needle[j]){
