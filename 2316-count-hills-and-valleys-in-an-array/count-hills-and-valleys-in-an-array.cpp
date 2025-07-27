@@ -15,6 +15,7 @@ public:
             
             }
             if(j != n)next = nums[j];
+            else continue;
             if(nums[i] > prev && nums[i] > next)hill++;
             if(nums[i] < prev && nums[i] < next)valley++;
             if(nums[i] != prev)prev = nums[i]; 
