@@ -1,27 +1,18 @@
 class Solution {
 public:
     int countHillValley(vector<int>& nums) {
+        vector<int>clean;
         int n = nums.size();
         int ans = 0;
-        stack<int>st;
-        int hill = 0;
-        int valley = 0;
-        int prev = nums[0];
-        int next =0;
-        for(int i = 1 ;i < n-1;i++){
-            int j = i+1;
-            while(j < n && nums[i]==nums[j]){
-            j++;
-            
-            }
-            if(j != n)next = nums[j];
-            else continue;
-            if(nums[i] > prev && nums[i] > next)hill++;
-            if(nums[i] < prev && nums[i] < next)valley++;
-            if(nums[i] != prev)prev = nums[i]; 
+        
+        for(int i = 0 ;i < n ;i++){
+            if(i==0 || nums[i] != nums[i-1])clean.push_back(nums[i]);
         }
-    
-        ans =hill + valley;
+
+        for(int i = 1 ;i < clean.size()-1 ;i++){
+            if(clean[i] > clean[i-1] && clean[i] > clean[i+1])ans++;
+            else if(clean[i] < clean[i-1] && clean[i] < clean[i+1])ans++;
+        }
         return ans;
     }
 };
