@@ -14,7 +14,7 @@ public:
         for(int i = 1 ; i < n ;i++){
             int a = i;
             int b = n-i;
-            cout<<a <<" "<<b<<endl;
+       
             if(NoZero(a) && NoZero(b)){
                 return {a,b};
             }
