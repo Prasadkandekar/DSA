@@ -1,14 +1,12 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        for(int i = 0 ; i < nums.size() ;i++){
-            cout<<nums[i] << " ";
-        }
-
-        for(int i = 0 ;i < nums.size() ;i++){
-            if(nums[i] != i)return nums[i]-1;
-        }
-        return nums.size();
+       int n = nums.size();
+       int sum = (n*(n+1))/2;
+       int arrSum = 0;
+       for(int i = 0 ;i < n ;i++){
+            arrSum += nums[i];
+       }
+       return sum - arrSum;
     }
 };
