@@ -4,7 +4,7 @@ public:
         int cnt= 0;
         int evenSum = 0;
         for(int i = 0 ;i < nums.size() ;i++){
-            if(nums[i]%2==0 && nums[i]%3==0){
+            if(nums[i]%6==0){
                 cnt++;
                 evenSum += nums[i];
             }
