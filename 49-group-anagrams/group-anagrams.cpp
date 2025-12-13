@@ -7,8 +7,17 @@ public:
         map<string,vector<string>>mp;
         
         for(int i = 0 ;i < n ;i++){
-            string key = strs[i];
-            sort(key.begin(),key.end());
+            vector<int>cnt(26);
+            for(char c: strs[i]){
+                cnt[c-'a']++;
+            }
+            string key = "";
+            for(int i= 0 ; i < 26 ; i++){
+                key +='$';
+                key += cnt[i]-'0';
+            }
+            // string key = strs[i];
+            // sort(key.begin(),key.end());
             mp[key].push_back(strs[i]);
         };
 
