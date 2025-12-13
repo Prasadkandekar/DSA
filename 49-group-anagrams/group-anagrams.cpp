@@ -14,10 +14,9 @@ public:
             string key = "";
             for(int i= 0 ; i < 26 ; i++){
                 key +='$';
-                key += cnt[i]-'0';
+                key += to_string(cnt[i]);
             }
-            // string key = strs[i];
-            // sort(key.begin(),key.end());
+           
             mp[key].push_back(strs[i]);
         };
 
