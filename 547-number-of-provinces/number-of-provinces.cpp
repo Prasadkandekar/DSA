@@ -25,9 +25,9 @@ public:
         for(int i = 0 ; i < n ;i++){
             int node = i;
             if(!visited[node]){
-                provinces++;
-                dfs(node,isConnected,visited);
                 
+                dfs(node,isConnected,visited);
+                provinces++;
             }
         }
 
