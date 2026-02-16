@@ -14,7 +14,7 @@ public:
         queue<pair<pair<int,int>,int>>q;
         vector<vector<int>> visited(m,vector<int>(n,0));
         q.push({{sr,sc},image[sr][sc]});
-        image[sr][sc] = color;
+        // image[sr][sc] = color;
         visited[sr][sc] = 1;
 
         while(!q.empty()){
