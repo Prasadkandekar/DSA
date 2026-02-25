@@ -5,7 +5,7 @@ public:
         if(st.find(endGene) == st.end())return -1;
         if(startGene == endGene)return 0;
         queue<pair<string,int>>q;
-        q.push({startGene,1});
+        q.push({startGene,0});
         st.erase(startGene);
 
         char Gene[] = {'A','C','G','T'};
@@ -16,7 +16,7 @@ public:
             string gene = q.front().first;
             int steps = q.front().second;
             q.pop();
-            if(gene == endGene)return steps-1;
+            if(gene == endGene)return steps;
 
             for(int i = 0 ; i < gene.size() ;i++){
                     char original = gene[i];
