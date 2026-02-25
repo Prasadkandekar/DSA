@@ -4,17 +4,19 @@ public:
         unordered_set<string>st(bank.begin(),bank.end());
         if(st.find(endGene) == st.end())return -1;
         if(startGene == endGene)return 0;
-        queue<string>q;
-        q.push(startGene);
+        queue<pair<string,int>>q;
+        q.push({startGene,1});
         st.erase(startGene);
-        int level = 0;
+
         char Gene[] = {'A','C','G','T'};
         while(!q.empty()){
-            int size = q.size();
-            while(size--){
+   
+   
 
-            string gene = q.front();q.pop();
-            if(gene == endGene)return level;
+            string gene = q.front().first;
+            int steps = q.front().second;
+            q.pop();
+            if(gene == endGene)return steps-1;
 
             for(int i = 0 ; i < gene.size() ;i++){
                     char original = gene[i];
@@ -22,15 +24,13 @@ public:
                         gene[i] = Gene[j];
                         if(st.find(gene) != st.end()){
                             st.erase(gene);
-                            q.push(gene);
+                            q.push({gene,steps+1});
                         }
                         
                     }
                     gene[i] = original;
             }
-            }
 
-             level++;
         }
         return -1;
     }
