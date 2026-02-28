@@ -36,9 +36,9 @@ private:
         int n = grid.size();
         int m = grid[0].size();
 
-        if(grid[row][col]=='1'){
+        
             visited[row][col]=1;
-        }
+        
 
         int dx[] = {1,0,-1,0};
         int dy[] = {0,1,0,-1};
