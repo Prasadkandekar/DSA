@@ -1,17 +1,19 @@
 class Solution {
 public:
     void solve(vector<vector<char>>& board) {
-        int m = board.size();
-        int n = board[0].size();
+        int n = board.size();
+        int m = board[0].size();
 
         queue<pair<int,int>>q;
-        vector<vector<int>>visited(m,vector<int>(n,0));
-        
-        for(int i = 0 ; i < m ;i++){
-            for(int j = 0 ;j < n ;j++){
-                if((i==0 || j==0 || i == m-1 || j == n-1) && board[i][j]=='O'){
-                    visited[i][j] = 1;
-                    q.push({i,j});
+        vector<vector<int>>visited(n,vector<int>(m,0));
+
+        for(int i = 0 ; i< n ;i++){
+            for(int j = 0 ;j<m ; j++){
+                if(i==0 || i==n-1 || j==0 || j==m-1){
+                    if(board[i][j]=='O' && !visited[i][j] ){
+                        q.push({i,j});
+                        visited[i][j] =1;
+                    }
                 }
             }
         }
@@ -24,24 +26,26 @@ public:
             int col = q.front().second;
             q.pop();
 
-            for(int i= 0 ;i < 4 ;i++){
+            for(int i = 0 ; i < 4 ; i++){
                 int nrow = row + drow[i];
                 int ncol = col + dcol[i];
-
-                if(nrow >= 0 && nrow < m && ncol >= 0 && ncol < n && !visited[nrow][ncol] && board[nrow][ncol]=='O'){
-                    visited[nrow][ncol]=1;
+                if(nrow >=0 && nrow < n && ncol >=0  && ncol < m && !visited[nrow][ncol] && board[nrow][ncol]=='O'){
                     q.push({nrow,ncol});
+                    visited[nrow][ncol] = 1;
                 }
-
             }
         }
 
-        for(int i = 0 ;i < m ;i++){
-            for(int j = 0 ;j < n ;j++){
+        for(int i = 0 ;  i<n ; i++){
+            for(int j=0 ; j<m ; j++){
                 if(!visited[i][j] && board[i][j]=='O'){
-                    board[i][j]= 'X';
+                    board[i][j] = 'X';
                 }
             }
         }
+
+
+
+
     }
 };
