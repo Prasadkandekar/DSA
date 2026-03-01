@@ -1,40 +1,33 @@
 class Solution {
+private:
+    void dfs(int row,int col,vector<vector<int>>& image,int color,vector<vector<int>>& visited, int startColor){
+        int n = image.size();
+        int m = image[0].size();
+        
+         visited[row][col] = 1;
+         image[row][col] = color;
+
+         int drow[] = {1,0,-1,0};
+         int dcol[] = {0,1,0,-1};
+
+         for(int i = 0  ; i < 4 ;i++){
+            int nrow = row + drow[i];
+            int ncol = col + dcol[i];
+            
+
+            if(nrow >=0 && nrow < n && ncol >= 0 && ncol < m && !visited[nrow][ncol] && image[nrow][ncol]==startColor){
+                dfs(nrow,ncol,image,color,visited,image[nrow][ncol]);
+            }
+         }
+    }
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        
-        if(image.empty())return image;
-        
+        int n = image.size();
+        int m = image[0].size();
 
-        int m = image.size();
-        int n = image[0].size();
-
-        int drow[] = {1,0,-1,0};
-        int dcol[] = {0,1,0,-1};
-
-        queue<pair<pair<int,int>,int>>q;
-        vector<vector<int>> visited(m,vector<int>(n,0));
-        q.push({{sr,sc},image[sr][sc]});
-        // image[sr][sc] = color;
-        visited[sr][sc] = 1;
-
-        while(!q.empty()){
-            int row = q.front().first.first;
-            int col = q.front().first.second;
-            int old_color = q.front().second;
-            q.pop();
-            image[row][col] = color;
-
-            for(int i = 0 ; i < 4 ;i++){
-                int nrow = row + drow[i];
-                int ncol = col + dcol[i];
-               
-
-                if(nrow >=0  && nrow < m && ncol >=0  && ncol < n && !visited[nrow][ncol] && image[nrow][ncol] == old_color){
-                    q.push({{nrow,ncol},image[nrow][ncol]});
-                    visited[nrow][ncol] = 1;
-                }
-            }
-        }
+        vector<vector<int>> visited(n,vector<int>(m,0));
+        int startColor = image[sr][sc];
+        dfs(sr,sc,image,color,visited,startColor);
         return image;
     }
 };
