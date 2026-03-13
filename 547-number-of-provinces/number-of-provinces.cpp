@@ -1,40 +1,51 @@
 class Solution {
 private:
-    void dfs(int node , vector<vector<int>>& adjL , vector<int>& visited){
+    void bfs(int Startnode, vector<int>& visited, vector<vector<int>>& adjL){
+        
+        queue<int>q;
+        q.push(Startnode);
+        visited[Startnode] = 1;
 
-        visited[node] = 1;
+        while(!q.empty()){
+            int node = q.front();q.pop();
 
-        for(auto neighbor : adjL[node]){
-            if(!visited[neighbor]){
-                dfs(neighbor,adjL,visited);
+            for(auto neighbor : adjL[node]){
+                if(!visited[neighbor]){
+                    q.push(neighbor);
+                    visited[neighbor] = 1;
+                }
             }
         }
+
     }
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
         int n = isConnected.size();
         int m = isConnected[0].size();
+        
+        //adj matrix to adj list:
         vector<vector<int>> adjL(n);
-        int count = 0;
-
-        for(int i = 0 ;i < n; i++){
-            for(int j = 0 ; j < m ; j++){
-                if(isConnected[i][j]==1 && i != j){
+        
+        for(int i = 0 ;i < n ; i++){
+            for(int j = 0 ; j < n  ;j++){
+                if(isConnected[i][j] == 1 && i != j){
                     adjL[i].push_back(j);
                     adjL[j].push_back(i);
                 }
             }
-        }// now we have adj list
+        }
 
         vector<int>visited(n,0);
 
-        for(int i = 0 ; i < n ;i++){
+        int provinces = 0;
+
+        for(int i = 0 ; i < n ; i++){
             if(!visited[i]){
-                dfs(i,adjL,visited);
-                count++;
+                bfs(i,visited,adjL);
+                provinces++;
             }
         }
 
-        return count;
+    return provinces;
     }
 };
