@@ -22,7 +22,7 @@ public:
 
            int currStops = q.front().first;
            int node = q.front().second.first;
-           int currDist = q.front().second.second;
+           int cost = q.front().second.second;
           
            q.pop();
             if(currStops > k) continue;
@@ -32,9 +32,9 @@ public:
                 int neighbor = it.first;
                 int price = it.second;
 
-                if(currDist + price < dist[neighbor]){
-                    dist[neighbor] = currDist + price;
-                    q.push({currStops+1,{neighbor,currDist+price}});
+                if(cost + price < dist[neighbor] && currStops <= k){
+                    dist[neighbor] = cost + price;
+                    q.push({currStops+1,{neighbor,cost+price}});
                 }
             }
             
