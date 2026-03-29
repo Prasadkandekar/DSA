@@ -4,7 +4,7 @@ public:
         int n1 = num1.size();
         int n2 = num2.size();
 
-        if(n1==1 && num1[0]=='0' || n2 == 1 && num2[0]=='0')return "0";
+        if(num2=="0" || num1 == "0")return "0";
 
         vector<int>res(n1+n2 ,0);
 
@@ -15,7 +15,6 @@ public:
 
             int ival = num2[i]-'0';
             i--;
-
             int j = n1-1;
             int carry = 0;
             int k = res.size()-1-pf;
@@ -23,11 +22,7 @@ public:
             while(j >= 0 || carry){
                 int jval = (j >= 0)?num1[j]-'0' : 0;
                 j--;
-               
-                
-
                  int prod = ival*jval + carry + res[k];
-                 cout << prod << " ";
                  res[k] = prod%10;
                  carry = prod/10;
                  k--;
