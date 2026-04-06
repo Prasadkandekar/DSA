@@ -37,42 +37,45 @@ class DisjointSet{
 class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
-        map<string,int>mp;// map of email, its acc idx
-        int V = accounts.size();
-
-        DisjointSet ds(V);
-        for(int i = 0 ;i < V ; i++){
-            for(int j = 1; j <accounts[i].size() ; j++){
+        int n = accounts.size();
+        unordered_map<string,int>mp;
+        DisjointSet ds(n);
+        for(int i = 0 ;i < n ;i++){
+            for(int j = 1 ;j < accounts[i].size(); j++){
                 string mail = accounts[i][j];
                 if(mp.find(mail) != mp.end()){
                     ds.unionBySize(i,mp[mail]);
                 }else{
-                     mp[mail]= i;
+                    mp[mail] = i;
                 }
             }
-        }//uinion done
+        }//union done
 
-        //merging
-        vector<string> mergedMails[V];
+        //merging Now :
+        vector<vector<string>> mergedMails(n);
+
         for(auto it : mp){
             int parent = ds.findParent(it.second);
             mergedMails[parent].push_back(it.first);
         }
 
         vector<vector<string>>ans;
-        for(int i = 0 ;i < V ;i++){
-            if(mergedMails[i].empty())continue;
 
+        for(int i = 0 ;i < n ; i++){
             vector<string>temp;
+            if(mergedMails[i].size()==0)continue;
+
             temp.push_back(accounts[i][0]);
-            for(auto mail : mergedMails[i]){
+            sort(mergedMails[i].begin(),mergedMails[i].end());
+            for(auto mail: mergedMails[i]){
+
                 temp.push_back(mail);
             }
-
+           
             ans.push_back(temp);
         }
 
-     
-    return ans ;
+return ans;
+
     }
 };
