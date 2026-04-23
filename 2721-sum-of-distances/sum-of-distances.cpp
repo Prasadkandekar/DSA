@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<long long> distance(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> ans(n,0);
+        unordered_map<int,long long> indexCount;
+         unordered_map<int,long long> indexSum;
+
+         // les go from left to right :
+         for(int i = 0 ;i < n ;i++){
+            long long freq = indexCount[nums[i]];
+            long long sum =  indexSum[nums[i]];
+
+            ans[i] += freq*i - sum;
+
+            indexCount[nums[i]]++;
+            indexSum[nums[i]] += i;
+
+         }
+
+        indexCount.clear();
+        indexSum.clear();
+         //from right to left;
+         for(int i = n-1 ; i >= 0 ;i--){
+            long long freq = indexCount[nums[i]];
+            long long sum =  indexSum[nums[i]];
+
+            ans[i] += sum - freq*i;
+
+            indexCount[nums[i]]++;
+            indexSum[nums[i]] += i;
+
+         }
+    
+        return ans;
+    }
+};
